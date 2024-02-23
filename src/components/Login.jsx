@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Login() {
 
 const [showPassword, setShowPassword] = useState(false);
+const [email, setEmail] = useState('');
 
 const handleClickShowPassword = () => setShowPassword((show) => !show);
 
@@ -27,6 +28,7 @@ const handleLogin = () => {
     const userInUsers = true; 
     if (userInUsers) {
         navigate('/home');
+        localStorage.setItem('email', email);
     } else {
       console.log('Brak użytkownika');
     }
@@ -35,7 +37,10 @@ const handleLogin = () => {
   return (
     <div>
         <h2>Logowanie</h2>
-        <TextField id="outlined-basic" label="Outlined" variant="outlined" />
+        <TextField 
+        value={email}
+        onChange={(e) => setEmail(e.target.value)}
+        id="outlined-basic" label="Outlined" variant="outlined" />
         <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
           <InputLabel htmlFor="outlined-adornment-password">Password</InputLabel>
           <OutlinedInput
